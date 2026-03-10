@@ -18,6 +18,23 @@ public class PalindromeCheckerApp {
         }
     }
 
+    // UC9 Recursive Function
+    public static boolean isPalindromeRecursive(String str, int start, int end) {
+
+        // Base condition
+        if (start >= end) {
+            return true;
+        }
+
+        // Compare characters
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call
+        return isPalindromeRecursive(str, start + 1, end - 1);
+    }
+
     public static void main(String[] args) {
 
         // --------------------------------
@@ -176,7 +193,7 @@ public class PalindromeCheckerApp {
         }
 
         // --------------------------------
-        // UC8: Linked List Based Palindrome Check
+        // UC8: Linked List Palindrome Check
         // --------------------------------
         System.out.print("\nEnter a string for Linked List Palindrome Check: ");
         String listInput = scanner.nextLine();
@@ -184,7 +201,6 @@ public class PalindromeCheckerApp {
         Node head = null;
         Node tail = null;
 
-        // Convert string to linked list
         for (char c : listInput.toCharArray()) {
             Node newNode = new Node(c);
 
@@ -197,7 +213,6 @@ public class PalindromeCheckerApp {
             }
         }
 
-        // Find middle using fast & slow pointer
         Node slow = head;
         Node fast = head;
 
@@ -206,7 +221,6 @@ public class PalindromeCheckerApp {
             fast = fast.next.next;
         }
 
-        // Reverse second half
         Node prev = null;
         Node current = slow;
 
@@ -217,7 +231,6 @@ public class PalindromeCheckerApp {
             current = next;
         }
 
-        // Compare halves
         Node firstHalf = head;
         Node secondHalf = prev;
 
@@ -237,6 +250,21 @@ public class PalindromeCheckerApp {
             System.out.println(listInput + " is a Palindrome (Using Linked List)");
         } else {
             System.out.println(listInput + " is NOT a Palindrome (Using Linked List)");
+        }
+
+        // --------------------------------
+        // UC9: Recursive Palindrome Checker
+        // --------------------------------
+        System.out.print("\nEnter a string for Recursive Palindrome Check: ");
+        String recursiveInput = scanner.nextLine();
+
+        boolean recursiveResult =
+                isPalindromeRecursive(recursiveInput, 0, recursiveInput.length() - 1);
+
+        if (recursiveResult) {
+            System.out.println(recursiveInput + " is a Palindrome (Using Recursion)");
+        } else {
+            System.out.println(recursiveInput + " is NOT a Palindrome (Using Recursion)");
         }
 
         scanner.close();
