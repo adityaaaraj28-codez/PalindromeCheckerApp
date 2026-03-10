@@ -4,15 +4,16 @@ public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // -------------------------------
+        // --------------------------------
         // UC1: Welcome Message
-        // -------------------------------
-        System.out.println("Welcome to Palindrome Checker App");
+        // --------------------------------
+        System.out.println("=================================");
+        System.out.println(" Welcome to Palindrome Checker App ");
+        System.out.println("=================================");
 
-
-        // -------------------------------
+        // --------------------------------
         // UC2: Hardcoded Palindrome Check
-        // -------------------------------
+        // --------------------------------
         String word = "madam";
         String reversed = "";
 
@@ -26,14 +27,13 @@ public class PalindromeCheckerApp {
             System.out.println(word + " is NOT a Palindrome");
         }
 
-
-        // -------------------------------
+        // --------------------------------
         // UC3: User Input Palindrome Check
-        // -------------------------------
-        Scanner sc = new Scanner(System.in);
+        // --------------------------------
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter a word to check: ");
-        String input = sc.nextLine();
+        System.out.print("\nEnter a word to check palindrome: ");
+        String input = scanner.nextLine();
 
         String reverseInput = "";
 
@@ -47,6 +47,36 @@ public class PalindromeCheckerApp {
             System.out.println(input + " is NOT a Palindrome");
         }
 
-        sc.close();
+        // --------------------------------
+        // UC4: Character Array Based Palindrome Check
+        // --------------------------------
+        System.out.print("\nEnter a string for Character Array Palindrome Check: ");
+        String arrayInput = scanner.nextLine();
+
+        // Convert string to char array
+        char[] characters = arrayInput.toCharArray();
+
+        int start = 0;
+        int end = characters.length - 1;
+
+        boolean isPalindrome = true;
+
+        // Two-pointer comparison
+        while (start < end) {
+            if (characters[start] != characters[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
+
+        if (isPalindrome) {
+            System.out.println(arrayInput + " is a Palindrome (Using Character Array)");
+        } else {
+            System.out.println(arrayInput + " is NOT a Palindrome (Using Character Array)");
+        }
+
+        scanner.close();
     }
 }
