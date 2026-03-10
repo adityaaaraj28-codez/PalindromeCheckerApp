@@ -21,17 +21,14 @@ public class PalindromeCheckerApp {
     // UC9 Recursive Function
     public static boolean isPalindromeRecursive(String str, int start, int end) {
 
-        // Base condition
         if (start >= end) {
             return true;
         }
 
-        // Compare characters
         if (str.charAt(start) != str.charAt(end)) {
             return false;
         }
 
-        // Recursive call
         return isPalindromeRecursive(str, start + 1, end - 1);
     }
 
@@ -265,6 +262,26 @@ public class PalindromeCheckerApp {
             System.out.println(recursiveInput + " is a Palindrome (Using Recursion)");
         } else {
             System.out.println(recursiveInput + " is NOT a Palindrome (Using Recursion)");
+        }
+
+        // --------------------------------
+        // UC10: Case-Insensitive & Space-Ignored Palindrome
+        // --------------------------------
+        System.out.print("\nEnter a string for Case-Insensitive & Space-Ignored Palindrome Check: ");
+        String caseInput = scanner.nextLine();
+
+        String normalized = caseInput.replaceAll("\\s+", "").toLowerCase();
+
+        String reversedCase = "";
+
+        for (int i = normalized.length() - 1; i >= 0; i--) {
+            reversedCase = reversedCase + normalized.charAt(i);
+        }
+
+        if (normalized.equals(reversedCase)) {
+            System.out.println(caseInput + " is a Palindrome (Ignoring Case & Spaces)");
+        } else {
+            System.out.println(caseInput + " is NOT a Palindrome (Ignoring Case & Spaces)");
         }
 
         scanner.close();
