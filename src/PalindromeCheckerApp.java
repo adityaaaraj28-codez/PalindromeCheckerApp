@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class PalindromeCheckerApp {
 
@@ -28,11 +30,11 @@ public class PalindromeCheckerApp {
             System.out.println(word + " is NOT a Palindrome");
         }
 
+        Scanner scanner = new Scanner(System.in);
+
         // --------------------------------
         // UC3: User Input Palindrome Check
         // --------------------------------
-        Scanner scanner = new Scanner(System.in);
-
         System.out.print("\nEnter a word to check palindrome: ");
         String input = scanner.nextLine();
 
@@ -58,7 +60,6 @@ public class PalindromeCheckerApp {
 
         int start = 0;
         int end = characters.length - 1;
-
         boolean isPalindrome = true;
 
         while (start < end) {
@@ -84,14 +85,12 @@ public class PalindromeCheckerApp {
 
         Stack<Character> stack = new Stack<>();
 
-        // Push characters into stack
         for (int i = 0; i < stackInput.length(); i++) {
             stack.push(stackInput.charAt(i));
         }
 
         String reversedStack = "";
 
-        // Pop characters from stack
         while (!stack.isEmpty()) {
             reversedStack = reversedStack + stack.pop();
         }
@@ -100,6 +99,36 @@ public class PalindromeCheckerApp {
             System.out.println(stackInput + " is a Palindrome (Using Stack)");
         } else {
             System.out.println(stackInput + " is NOT a Palindrome (Using Stack)");
+        }
+
+        // --------------------------------
+        // UC6: Queue + Stack Palindrome Check
+        // --------------------------------
+        System.out.print("\nEnter a string for Queue + Stack Palindrome Check: ");
+        String qsInput = scanner.nextLine();
+
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> stack2 = new Stack<>();
+
+        for (int i = 0; i < qsInput.length(); i++) {
+            char ch = qsInput.charAt(i);
+            queue.add(ch);     // enqueue
+            stack2.push(ch);   // push
+        }
+
+        boolean qsPalindrome = true;
+
+        while (!queue.isEmpty()) {
+            if (queue.remove() != stack2.pop()) {
+                qsPalindrome = false;
+                break;
+            }
+        }
+
+        if (qsPalindrome) {
+            System.out.println(qsInput + " is a Palindrome (Using Queue + Stack)");
+        } else {
+            System.out.println(qsInput + " is NOT a Palindrome (Using Queue + Stack)");
         }
 
         scanner.close();
