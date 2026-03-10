@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
@@ -48,12 +49,11 @@ public class PalindromeCheckerApp {
         }
 
         // --------------------------------
-        // UC4: Character Array Based Palindrome Check
+        // UC4: Character Array Palindrome Check
         // --------------------------------
         System.out.print("\nEnter a string for Character Array Palindrome Check: ");
         String arrayInput = scanner.nextLine();
 
-        // Convert string to char array
         char[] characters = arrayInput.toCharArray();
 
         int start = 0;
@@ -61,7 +61,6 @@ public class PalindromeCheckerApp {
 
         boolean isPalindrome = true;
 
-        // Two-pointer comparison
         while (start < end) {
             if (characters[start] != characters[end]) {
                 isPalindrome = false;
@@ -75,6 +74,32 @@ public class PalindromeCheckerApp {
             System.out.println(arrayInput + " is a Palindrome (Using Character Array)");
         } else {
             System.out.println(arrayInput + " is NOT a Palindrome (Using Character Array)");
+        }
+
+        // --------------------------------
+        // UC5: Stack-Based Palindrome Check
+        // --------------------------------
+        System.out.print("\nEnter a string for Stack Based Palindrome Check: ");
+        String stackInput = scanner.nextLine();
+
+        Stack<Character> stack = new Stack<>();
+
+        // Push characters into stack
+        for (int i = 0; i < stackInput.length(); i++) {
+            stack.push(stackInput.charAt(i));
+        }
+
+        String reversedStack = "";
+
+        // Pop characters from stack
+        while (!stack.isEmpty()) {
+            reversedStack = reversedStack + stack.pop();
+        }
+
+        if (stackInput.equals(reversedStack)) {
+            System.out.println(stackInput + " is a Palindrome (Using Stack)");
+        } else {
+            System.out.println(stackInput + " is NOT a Palindrome (Using Stack)");
         }
 
         scanner.close();
