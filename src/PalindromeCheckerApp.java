@@ -29,6 +29,59 @@ class PalindromeChecker {
     }
 }
 
+// --------------------------------
+// UC12: Strategy Pattern Interface
+// --------------------------------
+interface PalindromeStrategy {
+    boolean check(String input);
+}
+
+// Stack Strategy
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        String reversed = "";
+
+        while (!stack.isEmpty()) {
+            reversed += stack.pop();
+        }
+
+        return input.equals(reversed);
+    }
+}
+
+// Deque Strategy
+class DequeStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        Deque<Character> deque = new ArrayDeque<>();
+
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
+        }
+
+        while (deque.size() > 1) {
+
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+
+            if (front != rear) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
 public class PalindromeCheckerApp {
 
     // Node class for Linked List (UC8)
@@ -223,6 +276,7 @@ public class PalindromeCheckerApp {
         Node tail = null;
 
         for (char c : listInput.toCharArray()) {
+
             Node newNode = new Node(c);
 
             if (head == null) {
@@ -246,6 +300,7 @@ public class PalindromeCheckerApp {
         Node current = slow;
 
         while (current != null) {
+
             Node next = current.next;
             current.next = prev;
             prev = current;
@@ -258,6 +313,7 @@ public class PalindromeCheckerApp {
         boolean listPalindrome = true;
 
         while (secondHalf != null) {
+
             if (firstHalf.data != secondHalf.data) {
                 listPalindrome = false;
                 break;
@@ -322,6 +378,34 @@ public class PalindromeCheckerApp {
             System.out.println(oopInput + " is a Palindrome (Using OOP Service)");
         } else {
             System.out.println(oopInput + " is NOT a Palindrome (Using OOP Service)");
+        }
+
+        // --------------------------------
+        // UC12: Strategy Pattern Palindrome Checker
+        // --------------------------------
+        System.out.print("\nEnter a string for Strategy Pattern Palindrome Check: ");
+        String strategyInput = scanner.nextLine();
+
+        PalindromeStrategy strategy;
+
+        System.out.println("Choose Algorithm:");
+        System.out.println("1. Stack Strategy");
+        System.out.println("2. Deque Strategy");
+
+        int choice = scanner.nextInt();
+
+        if (choice == 1) {
+            strategy = new StackStrategy();
+        } else {
+            strategy = new DequeStrategy();
+        }
+
+        boolean result = strategy.check(strategyInput);
+
+        if (result) {
+            System.out.println(strategyInput + " is a Palindrome (Using Strategy Pattern)");
+        } else {
+            System.out.println(strategyInput + " is NOT a Palindrome (Using Strategy Pattern)");
         }
 
         scanner.close();
